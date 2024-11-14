@@ -31,7 +31,6 @@ import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.expensetracker.Transaction
 import com.example.expensetracker.TransactionType
-import com.example.expensetracker.mockTransactions
 import com.example.expensetracker.models.Expense
 import com.example.expensetracker.screens.HomeViewModel
 import com.example.expensetracker.ui.theme.textExpenseColor
