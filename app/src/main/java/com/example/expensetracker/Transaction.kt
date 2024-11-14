@@ -24,9 +24,9 @@ enum class TransactionType {
     INCOME, EXPENSE
 }
 
-// Room Database
-@Database(entities = [Transaction::class], version = 1)
-abstract class TransactionDatabase : RoomDatabase() {
-    abstract fun transactionDao(): TransactionDao
-}
+//// Room Database
+//@Database(entities = [Transaction::class], version = 1)
+//abstract class TransactionDatabase : RoomDatabase() {
+//    abstract fun transactionDao(): TransactionDao
+//}
 
