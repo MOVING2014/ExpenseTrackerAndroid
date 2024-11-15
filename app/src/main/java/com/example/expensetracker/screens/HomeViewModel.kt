@@ -53,4 +53,10 @@ class HomeViewModel @Inject constructor(
             expenseRepository.addExpense(expense)
         }
     }
+
+    fun deleteExpense(expense: Expense){
+        viewModelScope.launch {
+            expenseRepository.deleteExpense(expense.id)
+        }
+    }
 }
