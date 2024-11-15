@@ -1,6 +1,5 @@
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -23,81 +22,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.expensetracker.Transaction
 import com.example.expensetracker.TransactionType
 import com.example.expensetracker.models.Expense
-import com.example.expensetracker.screens.AddExpenseScreen
 import com.example.expensetracker.screens.HomeViewModel
 import com.example.expensetracker.ui.theme.textExpenseColor
 import com.example.expensetracker.ui.theme.textIncomeColor
 import java.text.SimpleDateFormat
-
-// presentation/screens/home/HomeScreen.kt
-@Composable
-fun HomeScreen(
-    viewModel: HomeViewModel = hiltViewModel()
-) {
-    val expenses by viewModel.expenses.collectAsState()
-    val categories by viewModel.categories.collectAsState()
-
-    Column {
-        // 顶部统计信息
-//        ExpensesSummary(expenses)
-
-        // 支出列表
-        LazyColumn {
-            items(expenses) { expense ->
-                ExpenseItem(
-                    expense = expense,
-                    onItemClick = { /* 处理点击事件 */ }
-                )
-            }
-        }
-    }
-}
-
-// presentation/components/ExpenseItem.kt
-@Composable
-fun ExpenseItem(
-    expense: Expense,
-    onItemClick: (Expense) -> Unit
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-            .clickable { onItemClick(expense) }
-    ) {
-        Row(
-            modifier = Modifier.padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Column {
-                Text(text = expense.category.name)
-                expense.note?.let {
-                    Text(
-                        text = it,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                }
-            }
-            Text(
-                text = "${if (expense.category.type == "expense") "-" else "+"}${expense.amount}",
-                color = if (expense.category.type == "expense")
-                    Color.Red else Color.Green
-            )
-        }
-    }
-}
-
-
 
 
 // 补充 TransactionsList 实现
