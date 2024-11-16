@@ -4,13 +4,16 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.*
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.expensetracker.models.*
 import com.example.expensetracker.screens.HomeViewModel
@@ -20,13 +23,20 @@ import java.util.Locale
 
 @Composable
 fun DailyTransactionCard(
-    dailyTransactions: HomeViewModel.DailyTransactions,
+    dailyTransactions: DailyTransactions,
     onDelete: (Expense) -> Unit
 ) {
     Card(
         modifier = Modifier
-            .padding(horizontal = 16.dp, vertical = 1.dp)
-            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 4.dp)
+            .fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        ),
+        elevation =  CardDefaults.cardElevation(
+            defaultElevation = 2.dp
+        )
+
     ) {
         Column(
             modifier = Modifier
@@ -45,44 +55,25 @@ fun DailyTransactionCard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = SimpleDateFormat("yyyy年MM月dd日 E", Locale.CHINESE)
+                        text = SimpleDateFormat("MM月dd日 E", Locale.CHINESE)
                             .format(dailyTransactions.date),
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onSurface
                     )
 
                     Text(
-                        text = "¥%.1f".format(dailyTransactions.netAmount),
+                        text = "支: %.1f".format(dailyTransactions.netAmount),
                         style = MaterialTheme.typography.titleMedium,
                         color = if (dailyTransactions.netAmount >= 0)
                             textIncomeColor else textExpenseColor
                     )
                 }
 
-                // 收支详情行
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    if (dailyTransactions.totalIncome > 0) {
-                        Text(
-                            text = "收入: ¥%.1f".format(dailyTransactions.totalIncome),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = textIncomeColor
-                        )
-                    }
-                    if (dailyTransactions.totalExpense > 0) {
-                        Text(
-                            text = "支出: ¥%.1f".format(dailyTransactions.totalExpense),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = textExpenseColor
-                        )
-                    }
-                }
+
             }
 
             // Divider
-            Divider(
+            HorizontalDivider(
                 modifier = Modifier.padding(vertical = 4.dp),
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f)
             )
@@ -94,7 +85,7 @@ fun DailyTransactionCard(
                     onDelete = onDelete
                 )
                 if (transaction != dailyTransactions.transactions.last()) {
-                    Divider(
+                    HorizontalDivider(
                         modifier = Modifier.padding(vertical = 4.dp),
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f)
                     )
@@ -126,12 +117,21 @@ private fun TransactionRow(
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
-            }
-            Text(
-                text = transaction.category.name,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-            )
+            } ?:
+                Text(
+                    text = transaction.category.name,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+
+            if(transaction.note != null)
+                Text(
+                    text = transaction.category.name,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                )
+
+
         }
 
         Row(
@@ -139,22 +139,22 @@ private fun TransactionRow(
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
-                text = "¥%.1f".format(transaction.amount),
+                text = "%.1f".format(transaction.amount),
                 style = MaterialTheme.typography.bodyMedium,
                 color = if (transaction.category.type == "income")
                     textIncomeColor else textExpenseColor
             )
 
-            IconButton(
-                onClick = { onDelete(transaction) },
-                modifier = Modifier.size(32.dp)
-            ) {
-                Icon(
-                    Icons.Default.Delete,
-                    contentDescription = "Delete",
-                    tint = MaterialTheme.colorScheme.error
-                )
-            }
+//            IconButton(
+//                onClick = { onDelete(transaction) },
+//                modifier = Modifier.size(32.dp)
+//            ) {
+//                Icon(
+//                    Icons.Default.Delete,
+//                    contentDescription = "Delete",
+//                    tint = MaterialTheme.colorScheme.error
+//                )
+//            }
         }
     }
 }

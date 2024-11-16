@@ -2,6 +2,7 @@ package com.example.expensetracker.screens
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.expensetracker.models.DailyTransactions
 import com.example.expensetracker.models.Expense
 import com.example.expensetracker.repository.*
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -113,15 +114,15 @@ class HomeViewModel @Inject constructor(
         emptyList()
     )
 
-    data class DailyTransactions(
-        val date: Date,
-        val transactions: List<Expense>,
-        val totalIncome: Double,
-        val totalExpense: Double
-    ) {
-        // 计算净额（收入 - 支出）
-        val netAmount: Double get() = totalIncome - totalExpense
-    }
+//    data class DailyTransactions(
+//        val date: Date,
+//        val transactions: List<Expense>,
+//        val totalIncome: Double,
+//        val totalExpense: Double
+//    ) {
+//        // 计算净额（收入 - 支出）
+//        val netAmount: Double get() = totalIncome - totalExpense
+//    }
 
     val groupedMonthlyExpenses = combine(selectedMonth, expenses) { yearMonth, expenseList ->
         expenseList
