@@ -46,7 +46,6 @@ fun TransactionItem(
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 1.dp)
                 .fillMaxWidth(),
-//            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
         ) {
             Row(
                 modifier = Modifier
