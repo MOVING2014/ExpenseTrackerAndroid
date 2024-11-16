@@ -24,6 +24,7 @@ import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.time.*      // 日期类
 import java.time.LocalDateTime  // 日期时间类
+import kotlin.math.ceil
 
 @Composable
 fun TransactionsCalendar(
@@ -92,11 +93,19 @@ fun TransactionsCalendar(
         val firstDayOfMonth = selectedMonth.atDay(1)
         val lastDayOfMonth = selectedMonth.atEndOfMonth()
         val firstDayOfWeek = firstDayOfMonth.dayOfWeek.value % 7
+        // 计算行数（包括星期标题行）
+        val numberOfWeeks = getNumberOfWeeks(selectedMonth)
+        val calendarHeight = (numberOfWeeks+1.2) * 40.dp // 每行高度40dp，+1是为了星期标题行
 
         LazyVerticalGrid(
             columns = GridCells.Fixed(7),
             horizontalArrangement = Arrangement.spacedBy(0.5.dp),
-            verticalArrangement = Arrangement.spacedBy(0.5.dp)
+            verticalArrangement = Arrangement.spacedBy(0.5.dp),
+            modifier = Modifier
+                .height(calendarHeight)
+                .fillMaxWidth(),
+            userScrollEnabled = false // 禁用滚动
+
         ) {
             // 填充月初空白天数
             items(firstDayOfWeek) {
@@ -168,3 +177,17 @@ private fun CalendarDayCell(
     }
 }
 
+// 计算日历需要显示的周数
+private fun getNumberOfWeeks(yearMonth: YearMonth): Int {
+    val firstDayOfMonth = yearMonth.atDay(1)
+    val lastDayOfMonth = yearMonth.atEndOfMonth()
+
+    // 获取第一天是星期几（周日为1，周六为7）
+    val firstDayOfWeek = firstDayOfMonth.dayOfWeek.value % 7
+
+    // 计算总天数（包括前面的空白天数）
+    val totalDays = firstDayOfWeek + yearMonth.lengthOfMonth()
+
+    // 计算需要的行数
+    return ceil(totalDays / 7.0).toInt()
+}

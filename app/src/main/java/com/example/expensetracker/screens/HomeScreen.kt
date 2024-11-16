@@ -55,21 +55,25 @@ fun MainScreen(viewModel: HomeViewModel = hiltViewModel(), onAddClick: () -> Uni
             }
         }
     ) { padding ->
-        Column(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
         ) {
 
+            LazyColumn(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                // 日历作为固定项
+                item {
+                    TransactionsCalendar(
+                        transactions = monthlyExpenses,
+                        selectedMonth = selectedMonth,
+                        onMonthChange = { viewModel.updateSelectedMonth(it) }
+                    )
+                }
 
-            TransactionsCalendar(
-                transactions = monthlyExpenses,
-                selectedMonth = selectedMonth,
-                onMonthChange = { viewModel.updateSelectedMonth(it) }
-
-            )
-
-            LazyColumn {
+                // 交易列表
                 items(groupedMonthlyExpenses) { dailyTransactions ->
                     DailyTransactionCard(
                         dailyTransactions = dailyTransactions,
@@ -77,18 +81,6 @@ fun MainScreen(viewModel: HomeViewModel = hiltViewModel(), onAddClick: () -> Uni
                     )
                 }
             }
-//            SummaryCard(
-//                totalIncome = totalIncome,
-//                totalExpense = totalExpense
-//            )
-
-//            TransactionsList(
-//                transactions = transactions,
-//                onDelete = { /* Mock delete action */
-//                expense ->
-//                    viewModel.deleteExpense(expense)
-//                }
-//            )
         }
 
     }
