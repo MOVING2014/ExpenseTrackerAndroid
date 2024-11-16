@@ -157,12 +157,20 @@ object MockData {
             date = Date(System.currentTimeMillis() - 691200000), // 8天前
             note = "基金收益",
             tags = mutableListOf("投资", "被动收入")
-        )
-        ,        Expense(
+        ),
+        Expense(
             id = UUID.randomUUID().toString(),
             category = incomeCategories[2], // 理财
             amount = 500.0,
             date = Date(System.currentTimeMillis() - 691200000), // 8天前
+            note = "基金收益",
+            tags = mutableListOf("投资", "被动收入")
+        ),
+        Expense(
+            id = UUID.randomUUID().toString(),
+            category = incomeCategories[2], // 理财
+            amount = 500.0,
+            date = Date(System.currentTimeMillis() - 691200000 * 4), // 8天前
             note = "基金收益",
             tags = mutableListOf("投资", "被动收入")
         )

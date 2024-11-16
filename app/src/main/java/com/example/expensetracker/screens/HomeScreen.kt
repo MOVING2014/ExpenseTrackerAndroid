@@ -6,12 +6,16 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.expensetracker.component.SummaryCard
+import com.example.expensetracker.component.TransactionsCalendar
 import com.example.expensetracker.component.TransactionsList
 import com.example.expensetracker.screens.HomeViewModel
-
+import java.time.YearMonth
 
 
 // 修改 MainScreen，使用 mock 数据
@@ -23,6 +27,10 @@ fun MainScreen(viewModel: HomeViewModel = hiltViewModel(), onAddClick: () -> Uni
     val transactions by viewModel.expenses.collectAsState()
     val totalIncome by viewModel.totalIncome.collectAsState()
     val totalExpense by viewModel.totalExpense.collectAsState()
+    val selectedMonth by viewModel.selectedMonth.collectAsState()
+    val monthlyExpenses by viewModel.monthlyExpenses.collectAsState()
+
+
 
     Scaffold(
         topBar = {
@@ -47,10 +55,18 @@ fun MainScreen(viewModel: HomeViewModel = hiltViewModel(), onAddClick: () -> Uni
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            SummaryCard(
-                totalIncome = totalIncome,
-                totalExpense = totalExpense
+
+
+            TransactionsCalendar(
+                transactions = monthlyExpenses,
+                selectedMonth = selectedMonth,
+                onMonthChange = { viewModel.updateSelectedMonth(it) }
+
             )
+//            SummaryCard(
+//                totalIncome = totalIncome,
+//                totalExpense = totalExpense
+//            )
 
             TransactionsList(
                 transactions = transactions,
