@@ -1,9 +1,12 @@
 package com.example.expensetracker.component
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.*
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -17,6 +20,8 @@ import androidx.compose.ui.unit.*
 import com.example.expensetracker.models.*
 import com.example.expensetracker.screens.toLocalDate
 import com.example.expensetracker.ui.theme.Typography
+import com.example.expensetracker.ui.theme.calendarViewBackground
+import com.example.expensetracker.ui.theme.calendarViewBg
 import com.example.expensetracker.ui.theme.textExpenseColor
 import com.example.expensetracker.ui.theme.textIncomeColor
 import com.example.expensetracker.utils.formatWithCommas
@@ -35,8 +40,15 @@ fun TransactionsCalendar(
     val groupedTransactions = transactions
         .groupBy { it.date.toLocalDate() }
         .mapValues { (_, transactions) ->
-            transactions.partition { it.category.name == "income" }
+            transactions.partition { it.category.type == "income" }
         }
+    groupedTransactions.forEach { (date, pair) ->
+        val (incomeList, expenseList) = pair
+        Log.d("TAG", "日期: $date")
+        Log.d("TAG", "- 收入: $incomeList")
+        Log.d("TAG", "- 支出: $expenseList")
+        Log.d("TAG", "----------------------")
+    }
 
     Column(
         modifier = Modifier
@@ -55,7 +67,7 @@ fun TransactionsCalendar(
             IconButton(onClick = {
                 onMonthChange(selectedMonth.minusMonths(1))
             }) {
-                Icon(Icons.Default.ChevronLeft, "Previous month")
+                Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, "Previous month")
             }
 
             Text(
@@ -66,7 +78,7 @@ fun TransactionsCalendar(
             IconButton(onClick = {
                 onMonthChange(selectedMonth.plusMonths(1))
             }) {
-                Icon(Icons.Default.ChevronRight, "Next month")
+                Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, "Next month")
             }
         }
 
@@ -142,7 +154,7 @@ private fun CalendarDayCell(
             containerColor = if (isToday)
                 MaterialTheme.colorScheme.primaryContainer
             else
-                MaterialTheme.colorScheme.primaryContainer
+                calendarViewBg
         ),
         border = if (isToday) BorderStroke(1.dp, MaterialTheme.colorScheme.primary) else null ,
         shape = RoundedCornerShape(5.dp)  // 在这里设置圆角

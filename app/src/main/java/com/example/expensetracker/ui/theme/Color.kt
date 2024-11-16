@@ -14,3 +14,7 @@ val Pink40 = Color(0xFF7D5260)
 val primaryColor = Color(0xFF76A471)
 val textExpenseColor = Color(0xFF76A471)
 val textIncomeColor = Color(0x99f13030)
+
+val  calendarViewBackground = Color(0x1a76a471)
+
+val  calendarViewBg = Color(0x08000000)
