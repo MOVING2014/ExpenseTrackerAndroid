@@ -27,6 +27,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.*
 import androidx.compose.ui.text.input.*
 import java.util.Date
+import java.util.UUID
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -114,7 +115,7 @@ fun AddExpenseScreen(
                         selectedCategory?.let { category ->
                             viewModel.addExpense(
                                 Expense(
-                                    id = "123",
+                                    id = UUID.randomUUID().toString(),
                                     amount = amountValue,
                                     note = note.takeIf { it.isNotBlank() },
                                     category = category,
