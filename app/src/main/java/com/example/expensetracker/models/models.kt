@@ -20,7 +20,7 @@ data class Expense(
     val amount: Double,
     val date: Date,
     var note: String? = null,
-    private var tags: MutableList<String> = mutableListOf()
+    var tags: List<String> = mutableListOf()
 ) {
     init {
         tags = extractTagsFromNote(note)
@@ -37,16 +37,16 @@ data class Expense(
 
     // 添加标签
     fun addTag(tag: String) {
-        if (!tags.contains(tag)) {
-            tags.add(tag)
-            updateNoteWithTags()
-        }
+//        if (!tags.contains(tag)) {
+//            tags.add(tag)
+//            updateNoteWithTags()
+//        }
     }
 
     // 删除标签
     fun removeTag(tag: String) {
-        tags.removeAll { it == tag }
-        updateNoteWithTags()
+//        tags.removeAll { it == tag }
+//        updateNoteWithTags()
     }
 
     // 更新note中的标签
@@ -60,11 +60,12 @@ data class Expense(
 
     // 获取不含标签的纯note内容
     fun getNoteWithoutTags(): String {
-        return note?.replace("#[\\w\\u4e00-\\u9fa5]+".toRegex(), "")?.trim() ?: ""
+//        return note?.replace("#[\\w\\u4e00-\\u9fa5]+".toRegex(), "")?.trim() ?: ""
+        return " "
     }
 
     // 获取标签列表
-    fun getTags(): List<String> = tags.toList()
+//    fun getTags(): List<String> = tags.toList()
 
     // 获取交易类型（支出或收入）
     fun getType(): String = category.type
