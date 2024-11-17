@@ -18,3 +18,5 @@ val textIncomeColor = Color(0x99f13030)
 val  calendarViewBackground = Color(0x1a76a471)
 
 val  calendarViewBg = Color(0x08000000)
+
+val InputButtonBorder = Color(0x4D000000)
