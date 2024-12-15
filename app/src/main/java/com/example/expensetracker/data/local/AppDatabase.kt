@@ -3,6 +3,10 @@ package com.example.expensetracker.data.local
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.example.expensetracker.data.local.dao.CategoryDao
+import com.example.expensetracker.data.local.dao.ExpenseDao
+import com.example.expensetracker.data.local.entity.CategoryEntity
+import com.example.expensetracker.data.local.entity.ExpenseEntity
 
 // data/database/AppDatabase.kt
 @Database(

@@ -1,17 +1,7 @@
 package com.example.expensetracker.data.model
 
-// Models.kt
-
 import android.annotation.SuppressLint
 import java.util.Date
-
-// Category 模型
-data class Category(
-    val id: String,
-    val name: String,
-    val icon: String,  // 可选的图标
-    val type: String // expense | income
-)
 
 // Expense 模型
 data class Expense(
@@ -83,24 +73,3 @@ data class Expense(
         return "$prefix${String.format("%.2f", kotlin.math.abs(amount))}"
     }
 }
-
-// 日支出汇总模型
-data class DailyExpenseSummary(
-    val date: Date,
-    val expenses: List<Expense>
-) {
-    val totalAmount: Double = expenses.sumOf { it.amount }
-    val totalExpense: Double = expenses
-        .filter { it.category.type == "expense" }
-        .sumOf { kotlin.math.abs(it.amount) }
-    val totalIncome: Double = expenses
-        .filter { it.category.type == "income" }
-        .sumOf { kotlin.math.abs(it.amount) }
-}
-
-// 月度汇总接口
-data class MonthSummary(
-    val month: String,
-    val expense: Double,
-    val income: Double
-)

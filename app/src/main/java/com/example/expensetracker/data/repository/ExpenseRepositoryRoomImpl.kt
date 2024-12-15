@@ -1,15 +1,17 @@
-package com.example.expensetracker.data.local
+package com.example.expensetracker.data.repository
 
-import com.example.expensetracker.data.model.Category
+import com.example.expensetracker.data.local.dao.CategoryDao
+import com.example.expensetracker.data.local.dao.ExpenseDao
+import com.example.expensetracker.data.local.mapper.toCategory
+import com.example.expensetracker.data.local.mapper.toEntity
+import com.example.expensetracker.data.local.mapper.toExpense
 import com.example.expensetracker.data.model.Expense
-import com.example.expensetracker.data.repository.CategoryRepository
-import com.example.expensetracker.data.repository.ExpenseRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 // data/repository/RoomExpenseRepository.kt
-class RoomExpenseRepository(
+class ExpenseRepositoryRoomImpl(
     private val expenseDao: ExpenseDao,
     private val categoryDao: CategoryDao
 ) : ExpenseRepository {
@@ -47,24 +49,5 @@ class RoomExpenseRepository(
 
     override suspend fun deleteExpense(id: String) {
         expenseDao.deleteExpense(id)
-    }
-}
-
-// data/repository/RoomCategoryRepository.kt
-class RoomCategoryRepository(
-    private val categoryDao: CategoryDao
-) : CategoryRepository {
-
-    override fun getAllCategories(): Flow<List<Category>> = categoryDao.getAllCategories()
-        .map { entities ->
-            entities.map { it.toCategory() }
-        }
-
-    override suspend fun addCategory(category: Category) {
-        categoryDao.insertCategory(category.toEntity())
-    }
-
-    override suspend fun deleteCategory(id: String) {
-        categoryDao.deleteCategory(id)
     }
 }

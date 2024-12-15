@@ -1,9 +1,11 @@
-package com.example.expensetracker.data.local
+package com.example.expensetracker.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.expensetracker.data.local.entity.CategoryEntity
+import com.example.expensetracker.data.local.entity.ExpenseEntity
 import kotlinx.coroutines.flow.Flow
 
 // data/dao/ExpenseDao.kt

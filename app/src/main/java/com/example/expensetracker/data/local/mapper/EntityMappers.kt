@@ -1,5 +1,7 @@
-package com.example.expensetracker.data.local
+package com.example.expensetracker.data.local.mapper
 
+import com.example.expensetracker.data.local.entity.CategoryEntity
+import com.example.expensetracker.data.local.entity.ExpenseEntity
 import com.example.expensetracker.data.model.Category
 import com.example.expensetracker.data.model.Expense
 

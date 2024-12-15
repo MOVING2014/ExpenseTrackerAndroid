@@ -2,11 +2,10 @@ package com.example.expensetracker.di
 import android.content.Context
 import androidx.room.Room
 import com.example.expensetracker.data.local.AppDatabase
-import com.example.expensetracker.data.local.MockCategoryRepository
-import com.example.expensetracker.data.local.MockExpenseRepository
+import com.example.expensetracker.data.repository.CategoryRepositoryMockImpl
+import com.example.expensetracker.data.repository.ExpenseRepositoryMockImpl
 import com.example.expensetracker.data.repository.CategoryRepository
 import com.example.expensetracker.data.repository.ExpenseRepository
-import com.example.expensetracker.repository.*
 import dagger.*
 import dagger.hilt.*
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -20,13 +19,13 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideExpenseRepository(): ExpenseRepository {
-        return MockExpenseRepository()
+        return ExpenseRepositoryMockImpl()
     }
 
     @Provides
     @Singleton
     fun provideCategoryRepository(): CategoryRepository {
-        return MockCategoryRepository()
+        return CategoryRepositoryMockImpl()
     }
 
     @Provides
