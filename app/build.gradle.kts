@@ -44,6 +44,11 @@ android {
 
 dependencies {
 
+    //noinspection GradleDependency
+    implementation(libs.androidx.room.runtime)  // 使用 Room 运行时库
+//    kapt("androidx.room:room-compiler:2.5.1")  // 如果使用的是 Kotlin
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

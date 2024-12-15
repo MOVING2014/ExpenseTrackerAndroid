@@ -12,7 +12,7 @@ class CategoryRepositoryRoomImpl(
     private val categoryDao: CategoryDao
 ) : CategoryRepository {
 
-    override fun getAllCategories(): Flow<List<Category>> = categoryDao.getAllCategories()
+    override fun getAllCategories(): Flow<List<Category>> = categoryDao.getAllCategoriesFlow()
         .map { entities ->
             entities.map { it.toCategory() }
         }
