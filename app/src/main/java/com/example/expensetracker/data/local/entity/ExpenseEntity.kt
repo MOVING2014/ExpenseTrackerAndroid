@@ -15,12 +15,3 @@ data class ExpenseEntity(
     val tags: List<String>
 )
 
-// data/entity/CategoryEntity.kt
-@Entity(tableName = "categories")
-data class CategoryEntity(
-    @PrimaryKey
-    val id: String,
-    val name: String,
-    val icon: String,
-    val type: String
-)
