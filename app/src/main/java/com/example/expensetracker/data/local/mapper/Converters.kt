@@ -6,12 +6,12 @@ import java.sql.Date
 // data/converter/Converters.kt
 class Converters {
     @TypeConverter
-    fun fromTimestamp(value: Long?): Date? {
+    fun fromTimestamp(value: Long?): java.util.Date? {
         return value?.let { Date(it) }
     }
 
     @TypeConverter
-    fun dateToTimestamp(date: Date?): Long? {
+    fun dateToTimestamp(date: java.util.Date?): Long? {
         return date?.time
     }
 
