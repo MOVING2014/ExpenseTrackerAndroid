@@ -2,9 +2,10 @@ package com.example.expensetracker.screens
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.expensetracker.models.DailyTransactions
-import com.example.expensetracker.models.Expense
-import com.example.expensetracker.repository.*
+import com.example.expensetracker.data.repository.CategoryRepository
+import com.example.expensetracker.data.repository.ExpenseRepository
+import com.example.expensetracker.data.model.DailyTransactions
+import com.example.expensetracker.data.model.Expense
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

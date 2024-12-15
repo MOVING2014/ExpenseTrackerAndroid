@@ -16,7 +16,6 @@ import androidx.compose.ui.*
 import androidx.compose.ui.unit.dp
 
 import androidx.hilt.navigation.compose.*
-import com.example.expensetracker.models.*
 import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -29,6 +28,8 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.sp
+import com.example.expensetracker.data.model.Category
+import com.example.expensetracker.data.model.Expense
 import com.example.expensetracker.ui.theme.AmountTextExpense
 import com.example.expensetracker.ui.theme.InputButtonBorder
 import com.example.expensetracker.ui.theme.NoteInput

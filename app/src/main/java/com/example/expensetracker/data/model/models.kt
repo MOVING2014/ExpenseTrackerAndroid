@@ -1,4 +1,4 @@
-package com.example.expensetracker.models
+package com.example.expensetracker.data.model
 
 // Models.kt
 

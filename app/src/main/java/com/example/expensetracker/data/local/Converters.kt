@@ -1,4 +1,4 @@
-package com.example.expensetracker.data
+package com.example.expensetracker.data.local
 
 import androidx.room.TypeConverter
 import java.sql.Date

@@ -27,8 +27,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.expensetracker.component.DailyTransactionCard
-import com.example.expensetracker.component.TransactionsCalendar
+import com.example.expensetracker.screens.component.DailyTransactionCard
+import com.example.expensetracker.screens.component.TransactionsCalendar
 import com.example.expensetracker.screens.HomeViewModel
 
 

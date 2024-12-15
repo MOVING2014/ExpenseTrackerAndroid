@@ -1,7 +1,11 @@
 package com.example.expensetracker.di
 import android.content.Context
 import androidx.room.Room
-import com.example.expensetracker.data.*
+import com.example.expensetracker.data.local.AppDatabase
+import com.example.expensetracker.data.local.MockCategoryRepository
+import com.example.expensetracker.data.local.MockExpenseRepository
+import com.example.expensetracker.data.repository.CategoryRepository
+import com.example.expensetracker.data.repository.ExpenseRepository
 import com.example.expensetracker.repository.*
 import dagger.*
 import dagger.hilt.*
@@ -27,7 +31,7 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(@ApplicationContext context: Context):AppDatabase{
+    fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,

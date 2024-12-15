@@ -1,8 +1,8 @@
-package com.example.expensetracker.component
+package com.example.expensetracker.screens.component
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import com.example.expensetracker.models.Expense
+import com.example.expensetracker.data.model.Expense
 
 
 // 补充 TransactionsList 实现

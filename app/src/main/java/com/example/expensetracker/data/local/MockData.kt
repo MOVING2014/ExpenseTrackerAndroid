@@ -1,6 +1,8 @@
-package com.example.expensetracker.data
-import com.example.expensetracker.models.*
-import com.example.expensetracker.repository.*
+package com.example.expensetracker.data.local
+import com.example.expensetracker.data.model.Category
+import com.example.expensetracker.data.model.Expense
+import com.example.expensetracker.data.repository.CategoryRepository
+import com.example.expensetracker.data.repository.ExpenseRepository
 import kotlinx.coroutines.flow.*
 
 // data/mock/MockData.kt

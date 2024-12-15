@@ -1,9 +1,9 @@
-package com.example.expensetracker.data
+package com.example.expensetracker.data.local
 
-import com.example.expensetracker.models.Category
-import com.example.expensetracker.models.Expense
-import com.example.expensetracker.repository.CategoryRepository
-import com.example.expensetracker.repository.ExpenseRepository
+import com.example.expensetracker.data.model.Category
+import com.example.expensetracker.data.model.Expense
+import com.example.expensetracker.data.repository.CategoryRepository
+import com.example.expensetracker.data.repository.ExpenseRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
