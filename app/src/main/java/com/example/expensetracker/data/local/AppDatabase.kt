@@ -7,6 +7,7 @@ import com.example.expensetracker.data.local.dao.CategoryDao
 import com.example.expensetracker.data.local.dao.ExpenseDao
 import com.example.expensetracker.data.local.entity.CategoryEntity
 import com.example.expensetracker.data.local.entity.ExpenseEntity
+import com.example.expensetracker.data.local.mapper.Converters
 
 // data/database/AppDatabase.kt
 @Database(
