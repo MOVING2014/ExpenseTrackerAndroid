@@ -4,7 +4,9 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import com.example.expensetracker.data.local.entity.ExpenseEntity
+import com.example.expensetracker.data.local.entity.ExpenseWithCategory
 import kotlinx.coroutines.flow.Flow
 
 // data/dao/ExpenseDao.kt
@@ -13,8 +15,18 @@ interface ExpenseDao {
     @Query("SELECT * FROM expenses")
     fun getAllExpenses(): Flow<List<ExpenseEntity>>
 
+    @Transaction
+    @Query("SELECT * FROM expenses")
+    fun getAllExpensesWithCategory(): Flow<List<ExpenseWithCategory>>
+
+
     @Query("SELECT * FROM expenses WHERE id = :id")
     fun getExpenseById(id: String): Flow<ExpenseEntity?>
+
+    @Transaction
+    @Query("SELECT * FROM expenses WHERE id = :id")
+    fun getExpenseWithCategoryById(id: String): Flow<ExpenseWithCategory?>
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertExpense(expense: ExpenseEntity)
