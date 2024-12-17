@@ -6,9 +6,10 @@ import com.example.expensetracker.data.local.mapper.toEntity
 import com.example.expensetracker.data.model.Category
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
 // data/repository/RoomCategoryRepository.kt
-class CategoryRepositoryRoomImpl(
+class CategoryRepositoryRoomImpl @Inject constructor(
     private val categoryDao: CategoryDao
 ) : CategoryRepository {
 

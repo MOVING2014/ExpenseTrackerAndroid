@@ -9,9 +9,10 @@ import com.example.expensetracker.data.model.Expense
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
 // data/repository/RoomExpenseRepository.kt
-class ExpenseRepositoryRoomImpl(
+class ExpenseRepositoryRoomImpl @Inject constructor(
     private val expenseDao: ExpenseDao,
     private val categoryDao: CategoryDao
 ) : ExpenseRepository {
