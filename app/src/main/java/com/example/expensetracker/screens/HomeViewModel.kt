@@ -134,44 +134,6 @@ class HomeViewModel @Inject constructor(
 
 
 
-//    val groupedMonthlyExpenses = combine(selectedMonth, expenses) { yearMonth, expenseList ->
-//        expenseList
-//            .filter { expense ->
-//                val localDate = expense.date.toLocalDate()
-//                YearMonth.from(localDate) == yearMonth
-//            }
-//            .groupBy {
-//                val calendar = Calendar.getInstance()
-//                calendar.time = it.date
-//                calendar.set(Calendar.HOUR_OF_DAY, 0)
-//                calendar.set(Calendar.MINUTE, 0)
-//                calendar.set(Calendar.SECOND, 0)
-//                calendar.set(Calendar.MILLISECOND, 0)
-//                calendar.time
-//            }
-//            .map { (date, dailyTransactions) ->
-//                val (incomeTransactions, expenseTransactions) = dailyTransactions.partition {
-//                    it.category.type == "income"
-//                }
-//
-//                DailyTransactions(
-//                    date = date,
-//                    transactions = dailyTransactions,
-//                    totalIncome = incomeTransactions.sumOf { it.amount },
-//                    totalExpense = expenseTransactions.sumOf { it.amount }
-//                )
-//            }
-//            .sortedByDescending { it.date }
-//    }.stateIn(
-//        viewModelScope,
-//        SharingStarted.WhileSubscribed(5000),
-//        emptyList()
-//    )
-
-
-
-
-
     fun addExpense(expense: Expense) {
         viewModelScope.launch {
             addExpenseUseCase(expense)
