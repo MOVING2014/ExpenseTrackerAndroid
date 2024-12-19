@@ -34,7 +34,6 @@ fun Date.toLocalDate(): LocalDate {
 // presentation/screens/home/HomeViewModel.kt
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val expenseRepository: ExpenseRepository,
     private  val getAllExpensesUseCase: GetAllExpensesUseCase,
     private  val getAllCategoriesUseCase: GetAllCategoriesUseCase,
     private val deleteExpenseUseCase: DeleteExpenseUseCase,
