@@ -13,7 +13,7 @@ import javax.inject.Inject
 class GetGroupedMonthlyExpensesUseCase @Inject constructor(
     private val expenseRepository: ExpenseRepository
 ) {
-    fun invoke(selectedMonth: Flow<YearMonth>, expenses: Flow<List<Expense>>): Flow<List<DailyTransactions>> {
+    operator fun invoke(selectedMonth: Flow<YearMonth>, expenses: Flow<List<Expense>>): Flow<List<DailyTransactions>> {
         return combine(selectedMonth, expenses) { yearMonth, expenseList ->
             expenseList
                 .filter { expense ->

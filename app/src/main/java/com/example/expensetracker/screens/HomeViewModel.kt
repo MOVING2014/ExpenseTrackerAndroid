@@ -9,6 +9,7 @@ import com.example.expensetracker.domain.usecase.AddExpenseUseCase
 import com.example.expensetracker.domain.usecase.DeleteExpenseUseCase
 import com.example.expensetracker.domain.usecase.GetAllCategoriesUseCase
 import com.example.expensetracker.domain.usecase.GetAllExpensesUseCase
+import com.example.expensetracker.domain.usecase.GetGroupedMonthlyExpensesUseCase
 import com.example.expensetracker.domain.usecase.UpdateExpenseUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -38,7 +39,8 @@ class HomeViewModel @Inject constructor(
     private  val getAllCategoriesUseCase: GetAllCategoriesUseCase,
     private val deleteExpenseUseCase: DeleteExpenseUseCase,
     private val updateExpenseUseCase: UpdateExpenseUseCase,
-    private  val addExpenseUseCase: AddExpenseUseCase
+    private  val addExpenseUseCase: AddExpenseUseCase,
+    private val getGroupedMonthlyExpensesUseCase: GetGroupedMonthlyExpensesUseCase
 ) : ViewModel() {
 
     val expenses = getAllExpensesUseCase()
@@ -123,40 +125,48 @@ class HomeViewModel @Inject constructor(
     )
 
 
+    val groupedMonthlyExpenses = getGroupedMonthlyExpensesUseCase(selectedMonth, expenses)
+        .stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5000),
+            emptyList() // 默认值为空列表
+        )
 
-    val groupedMonthlyExpenses = combine(selectedMonth, expenses) { yearMonth, expenseList ->
-        expenseList
-            .filter { expense ->
-                val localDate = expense.date.toLocalDate()
-                YearMonth.from(localDate) == yearMonth
-            }
-            .groupBy {
-                val calendar = Calendar.getInstance()
-                calendar.time = it.date
-                calendar.set(Calendar.HOUR_OF_DAY, 0)
-                calendar.set(Calendar.MINUTE, 0)
-                calendar.set(Calendar.SECOND, 0)
-                calendar.set(Calendar.MILLISECOND, 0)
-                calendar.time
-            }
-            .map { (date, dailyTransactions) ->
-                val (incomeTransactions, expenseTransactions) = dailyTransactions.partition {
-                    it.category.type == "income"
-                }
 
-                DailyTransactions(
-                    date = date,
-                    transactions = dailyTransactions,
-                    totalIncome = incomeTransactions.sumOf { it.amount },
-                    totalExpense = expenseTransactions.sumOf { it.amount }
-                )
-            }
-            .sortedByDescending { it.date }
-    }.stateIn(
-        viewModelScope,
-        SharingStarted.WhileSubscribed(5000),
-        emptyList()
-    )
+
+//    val groupedMonthlyExpenses = combine(selectedMonth, expenses) { yearMonth, expenseList ->
+//        expenseList
+//            .filter { expense ->
+//                val localDate = expense.date.toLocalDate()
+//                YearMonth.from(localDate) == yearMonth
+//            }
+//            .groupBy {
+//                val calendar = Calendar.getInstance()
+//                calendar.time = it.date
+//                calendar.set(Calendar.HOUR_OF_DAY, 0)
+//                calendar.set(Calendar.MINUTE, 0)
+//                calendar.set(Calendar.SECOND, 0)
+//                calendar.set(Calendar.MILLISECOND, 0)
+//                calendar.time
+//            }
+//            .map { (date, dailyTransactions) ->
+//                val (incomeTransactions, expenseTransactions) = dailyTransactions.partition {
+//                    it.category.type == "income"
+//                }
+//
+//                DailyTransactions(
+//                    date = date,
+//                    transactions = dailyTransactions,
+//                    totalIncome = incomeTransactions.sumOf { it.amount },
+//                    totalExpense = expenseTransactions.sumOf { it.amount }
+//                )
+//            }
+//            .sortedByDescending { it.date }
+//    }.stateIn(
+//        viewModelScope,
+//        SharingStarted.WhileSubscribed(5000),
+//        emptyList()
+//    )
 
 
 
