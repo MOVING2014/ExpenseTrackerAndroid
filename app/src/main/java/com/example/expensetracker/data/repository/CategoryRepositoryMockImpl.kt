@@ -1,7 +1,8 @@
 package com.example.expensetracker.data.repository
 
 import com.example.expensetracker.data.local.mock.MockData
-import com.example.expensetracker.data.model.Category
+import com.example.expensetracker.domain.model.Category
+import com.example.expensetracker.domain.repository.CategoryRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

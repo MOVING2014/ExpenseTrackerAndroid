@@ -4,11 +4,9 @@ import androidx.room.Room
 import com.example.expensetracker.data.local.AppDatabase
 import com.example.expensetracker.data.local.dao.CategoryDao
 import com.example.expensetracker.data.local.dao.ExpenseDao
-import com.example.expensetracker.data.repository.CategoryRepositoryMockImpl
-import com.example.expensetracker.data.repository.ExpenseRepositoryMockImpl
-import com.example.expensetracker.data.repository.CategoryRepository
+import com.example.expensetracker.domain.repository.CategoryRepository
 import com.example.expensetracker.data.repository.CategoryRepositoryRoomImpl
-import com.example.expensetracker.data.repository.ExpenseRepository
+import com.example.expensetracker.domain.repository.ExpenseRepository
 import com.example.expensetracker.data.repository.ExpenseRepositoryRoomImpl
 import dagger.*
 import dagger.hilt.*

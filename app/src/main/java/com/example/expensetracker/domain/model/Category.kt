@@ -1,4 +1,4 @@
-package com.example.expensetracker.data.model
+package com.example.expensetracker.domain.model
 
 // Category 模型
 data class Category(

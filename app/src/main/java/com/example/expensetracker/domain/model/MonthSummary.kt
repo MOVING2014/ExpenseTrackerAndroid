@@ -1,4 +1,4 @@
-package com.example.expensetracker.data.model
+package com.example.expensetracker.domain.model
 
 // 月度汇总接口
 data class MonthSummary(

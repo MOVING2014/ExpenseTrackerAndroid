@@ -2,8 +2,8 @@ package com.example.expensetracker.data.local.mapper
 
 import com.example.expensetracker.data.local.entity.CategoryEntity
 import com.example.expensetracker.data.local.entity.ExpenseEntity
-import com.example.expensetracker.data.model.Category
-import com.example.expensetracker.data.model.Expense
+import com.example.expensetracker.domain.model.Category
+import com.example.expensetracker.domain.model.Expense
 
 // data/mapper/EntityMappers.kt
 fun ExpenseEntity.toExpense(category: Category?) = Expense(

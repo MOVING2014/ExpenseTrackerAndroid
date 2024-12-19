@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.*
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.*
-import com.example.expensetracker.data.model.Expense
+import com.example.expensetracker.domain.model.Expense
 import com.example.expensetracker.screens.toLocalDate
 import com.example.expensetracker.ui.theme.Typography
 import com.example.expensetracker.ui.theme.calendarViewBg

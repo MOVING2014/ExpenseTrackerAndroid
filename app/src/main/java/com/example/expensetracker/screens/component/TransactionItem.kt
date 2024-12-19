@@ -20,7 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.expensetracker.data.model.Expense
+import com.example.expensetracker.domain.model.Expense
 import com.example.expensetracker.ui.theme.textExpenseColor
 import com.example.expensetracker.ui.theme.textIncomeColor
 import java.text.SimpleDateFormat

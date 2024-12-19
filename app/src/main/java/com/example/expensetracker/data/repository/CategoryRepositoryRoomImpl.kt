@@ -3,7 +3,8 @@ package com.example.expensetracker.data.repository
 import com.example.expensetracker.data.local.dao.CategoryDao
 import com.example.expensetracker.data.local.mapper.toCategory
 import com.example.expensetracker.data.local.mapper.toEntity
-import com.example.expensetracker.data.model.Category
+import com.example.expensetracker.domain.model.Category
+import com.example.expensetracker.domain.repository.CategoryRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

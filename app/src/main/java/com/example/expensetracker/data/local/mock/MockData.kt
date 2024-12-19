@@ -1,6 +1,6 @@
 package com.example.expensetracker.data.local.mock
-import com.example.expensetracker.data.model.Category
-import com.example.expensetracker.data.model.Expense
+import com.example.expensetracker.domain.model.Category
+import com.example.expensetracker.domain.model.Expense
 
 // data/mock/MockData.kt
 import java.util.Date

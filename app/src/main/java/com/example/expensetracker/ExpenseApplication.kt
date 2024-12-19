@@ -32,11 +32,15 @@ class ExpenseApplication : Application(){
 
         if (existingCategories.isEmpty()) {
             val categories = listOf(
-                CategoryEntity(id = "1", name = "Food", icon = "ic_food", type = "Expense"),
-                CategoryEntity(id = "2", name = "Transportation", icon = "ic_transport", type = "Expense"),
-                CategoryEntity(id = "3", name = "Entertainment", icon = "ic_entertainment", type = "Expense"),
-                CategoryEntity(id = "4", name = "Salary", icon = "ic_salary", type = "Income"),
-                CategoryEntity(id = "5", name = "Investments", icon = "ic_investment", type = "Income")
+                CategoryEntity(id = "1", name = "餐饮", icon = "ic_food", type = "expense"),
+                CategoryEntity(id = "2", name = "交通", icon = "directions_car", type = "expense"),
+                CategoryEntity(id = "3", name = "购物", icon = "shopping_bag", type = "expense"),
+                CategoryEntity(id = "4", name = "娱乐", icon = "sports_esports", type = "expense"),
+                CategoryEntity(id = "5", name = "住房", icon = "house", type = "expense"),
+                CategoryEntity(id = "6", name = "工资", icon = "account_balance_wallet", type = "income"),
+                CategoryEntity(id = "7", name = "奖金", icon = "card_giftcard", type = "income")
+
+
             )
             categoryDao.insertAll(categories)
         }

@@ -1,6 +1,6 @@
-package com.example.expensetracker.data.repository
+package com.example.expensetracker.domain.repository
 
-import com.example.expensetracker.data.model.Category
+import com.example.expensetracker.domain.model.Category
 import kotlinx.coroutines.flow.Flow
 
 // domain/repository/CategoryRepository.kt

@@ -28,8 +28,8 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.sp
-import com.example.expensetracker.data.model.Category
-import com.example.expensetracker.data.model.Expense
+import com.example.expensetracker.domain.model.Category
+import com.example.expensetracker.domain.model.Expense
 import com.example.expensetracker.ui.theme.AmountTextExpense
 import com.example.expensetracker.ui.theme.InputButtonBorder
 import com.example.expensetracker.ui.theme.NoteInput

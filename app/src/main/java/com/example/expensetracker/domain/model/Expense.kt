@@ -1,4 +1,4 @@
-package com.example.expensetracker.data.model
+package com.example.expensetracker.domain.model
 
 import android.annotation.SuppressLint
 import java.util.Date

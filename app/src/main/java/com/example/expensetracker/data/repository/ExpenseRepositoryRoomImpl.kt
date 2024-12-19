@@ -5,7 +5,8 @@ import com.example.expensetracker.data.local.dao.ExpenseDao
 import com.example.expensetracker.data.local.mapper.toCategory
 import com.example.expensetracker.data.local.mapper.toEntity
 import com.example.expensetracker.data.local.mapper.toExpense
-import com.example.expensetracker.data.model.Expense
+import com.example.expensetracker.domain.model.Expense
+import com.example.expensetracker.domain.repository.ExpenseRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
