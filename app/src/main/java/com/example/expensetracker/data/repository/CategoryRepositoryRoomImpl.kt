@@ -26,4 +26,13 @@ class CategoryRepositoryRoomImpl @Inject constructor(
     override suspend fun deleteCategory(id: String) {
         categoryDao.deleteCategory(id)
     }
+
+    override suspend fun updateCategory(category: Category) {
+        categoryDao.updateCategory(
+            category.id,
+            category.name,
+            category.icon,
+            category.type
+        )
+    }
 }

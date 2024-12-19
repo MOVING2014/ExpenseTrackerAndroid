@@ -25,4 +25,12 @@ class CategoryRepositoryMockImpl : CategoryRepository {
             currentList.filter { it.id != id }
         }
     }
+
+    override suspend fun updateCategory(category: Category) {
+        _categories.update { currentList ->
+            currentList.map {
+                if (it.id == category.id) category else it
+            }
+        }
+    }
 }

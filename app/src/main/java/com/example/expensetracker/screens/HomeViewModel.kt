@@ -2,10 +2,14 @@ package com.example.expensetracker.screens
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.expensetracker.domain.repository.CategoryRepository
 import com.example.expensetracker.domain.repository.ExpenseRepository
 import com.example.expensetracker.domain.model.DailyTransactions
 import com.example.expensetracker.domain.model.Expense
+import com.example.expensetracker.domain.usecase.AddExpenseUseCase
+import com.example.expensetracker.domain.usecase.DeleteExpenseUseCase
+import com.example.expensetracker.domain.usecase.GetAllCategoriesUseCase
+import com.example.expensetracker.domain.usecase.GetAllExpensesUseCase
+import com.example.expensetracker.domain.usecase.UpdateExpenseUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -31,10 +35,14 @@ fun Date.toLocalDate(): LocalDate {
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val expenseRepository: ExpenseRepository,
-    private val categoryRepository: CategoryRepository
+    private  val getAllExpensesUseCase: GetAllExpensesUseCase,
+    private  val getAllCategoriesUseCase: GetAllCategoriesUseCase,
+    private val deleteExpenseUseCase: DeleteExpenseUseCase,
+    private val updateExpenseUseCase: UpdateExpenseUseCase,
+    private  val addExpenseUseCase: AddExpenseUseCase
 ) : ViewModel() {
 
-    val expenses = expenseRepository.getAllExpenses()
+    val expenses = getAllExpensesUseCase()
         .stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5000),
@@ -57,7 +65,7 @@ class HomeViewModel @Inject constructor(
         0.0
     )
 
-    val categories = categoryRepository.getAllCategories()
+    val categories = getAllCategoriesUseCase()
         .stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5000),
@@ -115,15 +123,7 @@ class HomeViewModel @Inject constructor(
         emptyList()
     )
 
-//    data class DailyTransactions(
-//        val date: Date,
-//        val transactions: List<Expense>,
-//        val totalIncome: Double,
-//        val totalExpense: Double
-//    ) {
-//        // 计算净额（收入 - 支出）
-//        val netAmount: Double get() = totalIncome - totalExpense
-//    }
+
 
     val groupedMonthlyExpenses = combine(selectedMonth, expenses) { yearMonth, expenseList ->
         expenseList
@@ -165,13 +165,19 @@ class HomeViewModel @Inject constructor(
 
     fun addExpense(expense: Expense) {
         viewModelScope.launch {
-            expenseRepository.addExpense(expense)
+            addExpenseUseCase(expense)
+        }
+    }
+
+    fun updateExpense(expense: Expense){
+        viewModelScope.launch {
+            updateExpenseUseCase(expense)
         }
     }
 
     fun deleteExpense(expense: Expense){
         viewModelScope.launch {
-            expenseRepository.deleteExpense(expense.id)
+            deleteExpenseUseCase(expense)
         }
     }
 }
