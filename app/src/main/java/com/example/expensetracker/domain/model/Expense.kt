@@ -9,7 +9,7 @@ data class Expense(
     val category: Category,
     val amount: Double,
     val date: Date,
-    var note: String? = null,
+    var note: String? ,
     var tags: List<String> = mutableListOf()
 ) {
     init {

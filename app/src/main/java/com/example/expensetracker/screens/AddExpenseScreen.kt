@@ -427,7 +427,7 @@ private fun handleAddExpense(
                 Expense(
                     id = UUID.randomUUID().toString(),
                     amount = amountValue,
-                    note = note.takeIf { it.isNotBlank() },
+                    note = note,
                     category = category,
                     date = Date()
                 )

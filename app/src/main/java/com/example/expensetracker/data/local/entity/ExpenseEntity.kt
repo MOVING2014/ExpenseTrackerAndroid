@@ -11,7 +11,7 @@ data class ExpenseEntity(
     val categoryId: String,
     val amount: Double,
     val date: java.util.Date,
-    val note: String,
+    val note: String? = null,
     val tags: List<String>
 )
 
