@@ -416,7 +416,7 @@ fun KeypadButton(
 
 private fun handleAddExpense(
     amount: String,
-    note: String,
+    note: String?,
     selectedCategory: Category?,
     onNavigateBack: () -> Unit,
     addExpense: (Expense) -> Unit
@@ -427,7 +427,7 @@ private fun handleAddExpense(
                 Expense(
                     id = UUID.randomUUID().toString(),
                     amount = amountValue,
-                    note = note,
+                    note =  note,
                     category = category,
                     date = Date()
                 )

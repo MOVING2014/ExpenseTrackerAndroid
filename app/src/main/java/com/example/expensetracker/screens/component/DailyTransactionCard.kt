@@ -148,20 +148,23 @@ private fun TransactionRow(
         Column(
             modifier = Modifier.weight(1f)
         ) {
-            transaction.note?.let {
-                Text(
-                    text = it,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-            } ?:
-                Text(
-                    text = transaction.category.name,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
 
-            if(transaction.note != null)
+            val displayText = if (!transaction.note.isNullOrEmpty()) {
+                transaction.note
+            } else {
+                transaction.category.name
+            }
+
+
+            if (displayText != null) {
+                Text(
+                    text = displayText,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+
+            if(!transaction.note.isNullOrEmpty())
                 Text(
                     text = transaction.category.name,
                     style = MaterialTheme.typography.bodySmall,
