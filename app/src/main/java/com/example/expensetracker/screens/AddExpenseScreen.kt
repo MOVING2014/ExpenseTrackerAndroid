@@ -34,6 +34,7 @@ import com.example.expensetracker.ui.theme.AmountTextExpense
 import com.example.expensetracker.ui.theme.InputButtonBorder
 import com.example.expensetracker.ui.theme.NoteInput
 import com.example.expensetracker.ui.theme.TextFieldStyles
+import java.util.Calendar
 import java.util.Date
 import java.util.UUID
 
@@ -59,7 +60,10 @@ fun AddExpenseScreen(
     val focusRequester = remember { FocusRequester() }
     var selectedTag by remember { mutableStateOf("") }
 
-
+    // 维护日期选择器的状态
+    var selectedDate by remember { mutableStateOf<String?>(null) }
+    var showDatePickerDialog by remember { mutableStateOf(false) }
+    // 当点击 "日期" 标签时，弹出日期选择器
 
     Scaffold(
         containerColor = Color.White,
@@ -168,6 +172,12 @@ fun AddExpenseScreen(
                     )
                     TagChip(
                         text = "晚餐",
+                        selected = selectedTag == "晚餐",
+                        onClick = { selectedTag = "晚餐" }
+                    )
+
+                    TagChip(
+                        text = "日期",
                         selected = selectedTag == "晚餐",
                         onClick = { selectedTag = "晚餐" }
                     )
@@ -417,6 +427,7 @@ fun KeypadButton(
 private fun handleAddExpense(
     amount: String,
     note: String?,
+    dt: java.util.Date = Date(),
     selectedCategory: Category?,
     onNavigateBack: () -> Unit,
     addExpense: (Expense) -> Unit
@@ -429,7 +440,7 @@ private fun handleAddExpense(
                     amount = amountValue,
                     note =  note,
                     category = category,
-                    date = Date()
+                    date = dt
                 )
             )
             onNavigateBack()
