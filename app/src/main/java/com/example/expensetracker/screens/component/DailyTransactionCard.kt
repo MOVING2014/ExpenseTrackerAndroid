@@ -1,12 +1,23 @@
 package com.example.expensetracker.screens.component
 import android.icu.text.SimpleDateFormat
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -96,6 +107,37 @@ private fun TransactionRow(
     transaction: Expense,
     onDelete: (Expense) -> Unit
 ) {
+
+
+    var showDialog2 by remember { mutableStateOf(false) }
+
+    // AlertDialog 用于确认删除
+    if (showDialog2) {
+        AlertDialog(
+            onDismissRequest = { showDialog2 = false },  // 点击外部区域关闭对话框
+            title = { Text(text = "更多") },
+//            text = { Text(text = "更多") },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        onDelete(transaction)
+                        showDialog2 = false  // 点击确认后执行删除并关闭对话框
+                    }
+                ) {
+                    Text("删除")
+                }
+            },
+
+            dismissButton = {
+                TextButton(
+                    onClick = { showDialog2 = false }  // 点击取消时关闭对话框
+                ) {
+                    Text("取消")
+                }
+            }
+        )
+    }
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -140,16 +182,16 @@ private fun TransactionRow(
                     textIncomeColor else textExpenseColor
             )
 
-//            IconButton(
-//                onClick = { onDelete(transaction) },
-//                modifier = Modifier.size(32.dp)
-//            ) {
-//                Icon(
-//                    Icons.Default.Delete,
-//                    contentDescription = "Delete",
-//                    tint = MaterialTheme.colorScheme.error
-//                )
-//            }
+            IconButton(
+                onClick = { showDialog2 = true},
+                modifier = Modifier.size(16.dp)
+            ) {
+                Icon(
+                    Icons.Default.MoreVert,
+                    contentDescription = "Delete",
+                    tint = MaterialTheme.colorScheme.tertiary
+                )
+            }
         }
     }
 }
