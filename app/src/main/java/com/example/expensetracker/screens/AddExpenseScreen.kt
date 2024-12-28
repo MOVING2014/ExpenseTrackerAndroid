@@ -51,8 +51,8 @@ fun AddExpenseScreen(
 
     var selectedCategory by remember { mutableStateOf<Category?>(null) }
     val categories by viewModel.categories.collectAsState()
-    LaunchedEffect(Unit) {
-        if (selectedCategory == null && categories.isNotEmpty()) {
+    LaunchedEffect(categories) {
+        if (selectedCategory == null && categories.isNotEmpty() ) {
             selectedCategory = categories.first()
         }
     }
