@@ -1,8 +1,12 @@
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -50,9 +54,23 @@ fun MainScreen(viewModel: HomeViewModel = hiltViewModel(), onAddClick: () -> Uni
 
     Scaffold(
         containerColor = Color.White,
+
+        contentWindowInsets = WindowInsets(0),
+        modifier = Modifier
+            .fillMaxSize()
+            .navigationBarsPadding() // 处理导航栏padding
+//            .systemBarsPadding()    // 处理系统栏padding
+//            .statusBarsPadding()
+            ,
+
+
+
         topBar = {
             TopAppBar(
-                modifier = Modifier.height(35.dp),
+//                modifier = Modifier.height(65.dp),
+                modifier = Modifier
+                    .height(70.dp),
+
                 title = {
                     Box(
                         modifier = Modifier.fillMaxHeight(),

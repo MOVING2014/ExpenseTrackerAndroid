@@ -67,6 +67,13 @@ fun AddExpenseScreen(
 
     Scaffold(
         containerColor = Color.White,
+        contentWindowInsets = WindowInsets(0),
+        modifier = Modifier
+            .fillMaxSize()
+            .navigationBarsPadding() // 处理导航栏padding
+//            .systemBarsPadding()    // 处理系统栏padding
+//            .statusBarsPadding()
+            ,
         topBar = {
             TopAppBar(
                 title = { Text("Add Transaction") },
