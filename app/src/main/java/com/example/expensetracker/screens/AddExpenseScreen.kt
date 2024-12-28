@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import com.example.expensetracker.domain.model.Category
 import com.example.expensetracker.domain.model.Expense
 import com.example.expensetracker.ui.theme.AmountTextExpense
+import com.example.expensetracker.ui.theme.AmountTextIncome
 import com.example.expensetracker.ui.theme.InputButtonBorder
 import com.example.expensetracker.ui.theme.NoteInput
 import com.example.expensetracker.ui.theme.TextFieldStyles
@@ -129,7 +130,8 @@ fun AddExpenseScreen(
                         value = amount,
                         onValueChange = { amount = it },
                         placeholder = { Text("0.0"
-                        , modifier = Modifier.fillMaxWidth(), style = AmountTextExpense
+                        , modifier = Modifier.fillMaxWidth(),
+                            style = if (selectedCategory?.type  == "income")  AmountTextIncome else AmountTextExpense
                         ) },
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Decimal,
@@ -143,7 +145,7 @@ fun AddExpenseScreen(
                         ,
                         singleLine = true,
                         shape = RectangleShape,
-                        textStyle =  AmountTextExpense,
+                        textStyle =  if (selectedCategory?.type  == "income")  AmountTextIncome else AmountTextExpense,
 
                         colors = TextFieldStyles.defaultColors(),
                         enabled =  false
@@ -278,7 +280,7 @@ fun CategoryChip(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = category.name,
+                text = category.icon + category.name,
                 style = MaterialTheme.typography.bodyMedium,
                 color = if (selected) MaterialTheme.colorScheme.onPrimaryContainer
                 else MaterialTheme.colorScheme.onSurface

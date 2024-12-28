@@ -141,12 +141,13 @@ private fun TransactionRow(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp),
+            .padding(vertical = 0.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(2.dp)
         ) {
 
             val displayText = if (!transaction.note.isNullOrEmpty()) {
@@ -156,20 +157,28 @@ private fun TransactionRow(
             }
 
 
-            if (displayText != null) {
-                Text(
-                    text = displayText,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-            }
+            Text(
+                text = transaction.category.icon + " | " + displayText,
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurface
+            )
 
-            if(!transaction.note.isNullOrEmpty())
+
+            if(!transaction.note.isNullOrEmpty()) {
+//                HorizontalDivider(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .padding(vertical = 2.dp),
+//                    thickness = 0.0.dp,
+//                    color = Color.White
+//                )
                 Text(
+//                    modifier = Modifier.padding(vertical = 2.dp),
                     text = transaction.category.name,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                 )
+            }
 
 
         }
@@ -180,7 +189,7 @@ private fun TransactionRow(
         ) {
             Text(
                 text = "%.1f".format(transaction.amount),
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.titleSmall,
                 color = if (transaction.category.type == "income")
                     textIncomeColor else textExpenseColor
             )
