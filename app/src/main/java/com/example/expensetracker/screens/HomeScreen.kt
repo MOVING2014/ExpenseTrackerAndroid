@@ -1,12 +1,11 @@
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -29,9 +28,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.expensetracker.screens.component.DailyTransactionCard
+import com.example.expensetracker.screens.component.dailytransaction.DailyTransactionCard
 import com.example.expensetracker.screens.component.TransactionsCalendar
 import com.example.expensetracker.screens.HomeViewModel
 
@@ -142,6 +140,13 @@ fun MainScreen(viewModel: HomeViewModel = hiltViewModel(), onAddClick: () -> Uni
                         onDelete = { viewModel.deleteExpense(it) }
                     )
                 }
+
+                item{
+                    Spacer(modifier = Modifier.height(80.dp)) // 可以根据需要调整高度
+
+                }
+
+
             }
         }
 
