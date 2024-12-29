@@ -30,11 +30,15 @@ import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.sp
 import com.example.expensetracker.domain.model.Category
 import com.example.expensetracker.domain.model.Expense
+import com.example.expensetracker.screens.component.CalendarDateSelector
 import com.example.expensetracker.ui.theme.AmountTextExpense
 import com.example.expensetracker.ui.theme.AmountTextIncome
 import com.example.expensetracker.ui.theme.InputButtonBorder
 import com.example.expensetracker.ui.theme.NoteInput
 import com.example.expensetracker.ui.theme.TextFieldStyles
+import com.example.expensetracker.utils.toDate
+import com.example.expensetracker.utils.toShortString
+import java.time.LocalDate
 import java.util.Calendar
 import java.util.Date
 import java.util.UUID
@@ -62,8 +66,8 @@ fun AddExpenseScreen(
     var selectedTag by remember { mutableStateOf("") }
 
     // 维护日期选择器的状态
-    var selectedDate by remember { mutableStateOf<String?>(null) }
-    var showDatePickerDialog by remember { mutableStateOf(false) }
+    var selectedDate by remember { mutableStateOf(LocalDate.now()) }
+    var showCalendar by remember { mutableStateOf(false) }
     // 当点击 "日期" 标签时，弹出日期选择器
 
     Scaffold(
@@ -170,6 +174,12 @@ fun AddExpenseScreen(
                 ) {
                     // 这里可以使用 LazyRow 如果标签很多的话
                     TagChip(
+                        text = selectedDate.toShortString(),
+                        selected = selectedDate == LocalDate.now(),
+                        onClick = { showCalendar = true }
+                    )
+
+                    TagChip(
                         text = "早餐",
                         selected = selectedTag == "早餐",
                         onClick = { selectedTag = "早餐" }
@@ -185,11 +195,7 @@ fun AddExpenseScreen(
                         onClick = { selectedTag = "晚餐" }
                     )
 
-                    TagChip(
-                        text = "日期",
-                        selected = selectedTag == "晚餐",
-                        onClick = { selectedTag = "晚餐" }
-                    )
+
                     // 添加更多标签...
                 }
 
@@ -212,6 +218,7 @@ fun AddExpenseScreen(
                         handleAddExpense(
                             amount = amount,
                             note = note,
+                            dt = selectedDate.toDate(),
                             selectedCategory = selectedCategory,
                             onNavigateBack = onNavigateBack,
                             addExpense = viewModel::addExpense
@@ -230,6 +237,17 @@ fun AddExpenseScreen(
                 .padding(16.dp)
                 .fillMaxWidth()
         ) {
+
+
+            CalendarDateSelector(
+                visible = showCalendar,
+                selectedDate = selectedDate,
+                onDateSelected = { date ->
+                    selectedDate = date
+                    showCalendar = false
+                },
+                onDismiss = { showCalendar = false }
+            )
 
 
             LazyVerticalGrid(
